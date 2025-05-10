@@ -11,7 +11,6 @@ class DayRestriction:
         "Thursday": [7, 8],
         "Friday": [9, 0], 
     }
-
     def __init__(self):
         self.schedule = Schedule()
 

@@ -20,7 +20,7 @@ def index():
             day_checker = DayRestriction()
             time_checker = TimeRestriction()
 
-            has_day_restriction = day_checker.check_day_restriction(date, plate)
+            has_day_restriction = day_checker.check_day_restriction(date, vehicle.get_plate())
             has_time_restriction = time_checker.check_time_restriction(time)
 
             if has_day_restriction and has_time_restriction:
