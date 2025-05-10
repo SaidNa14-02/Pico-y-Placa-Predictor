@@ -125,4 +125,4 @@ Output:
 - Jinja2 for template rendering
 
 ### 8. Screenshots
-[alt text](image.png)
+![Pico y Placa Interface](/image.png)
