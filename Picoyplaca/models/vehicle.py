@@ -11,6 +11,7 @@ class Vehicle:
         else:
             raise ValueError("Invalid plate format")
     
+    # Check if the plate format is valid
     def check_plate(self, plate):
         if not plate or not isinstance(plate, str):
             return False
@@ -31,6 +32,7 @@ class Vehicle:
             
         return True
     
+    # Get the last digit of the plate and splits the string to get the last digit based on the '-'
     def get_last_digit(self):
         return self.__plate.split('-')[1][-1]
 

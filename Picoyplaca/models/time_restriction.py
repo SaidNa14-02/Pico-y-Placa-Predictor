@@ -9,6 +9,7 @@ class TimeRestriction:
     def __init__(self):
         self.schedule = Schedule()
 
+    #This method verifies if the input time is or is not in the restriction hours
     def check_time_restriction(self, input_time): 
         if not self.schedule.check_time(input_time):
             raise ValueError("Invalid time format")

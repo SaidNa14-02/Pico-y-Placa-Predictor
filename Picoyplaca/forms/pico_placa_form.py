@@ -12,18 +12,21 @@ class PicoPlacaForm(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(PicoPlacaForm, self).__init__(*args, **kwargs)
-        self.schedule = Schedule()
-
+    
     def validate_plate(self, field):
         try:
-            vehicle = Vehicle(field.data)
-        except ValueError:
-            raise ValidationError('Invalid plate format. Must be ABC-1234')
+            Vehicle(field.data)
+        except ValueError as e:
+            raise ValidationError(str(e))
 
     def validate_date(self, field):
-        if not self.schedule.check_date(field.data):
-            raise ValidationError('Invalid date format. Must be YYYY-MM-DD')
+        try:
+            Schedule().check_date(field.data)
+        except ValueError as e:
+            raise ValidationError(str(e))
 
     def validate_time(self, field):
-        if not self.schedule.check_time(field.data):
-            raise ValidationError('Invalid time format. Must be HH:MM')
+        try:
+            Schedule().check_time(field.data)
+        except ValueError as e:
+            raise ValidationError(str(e))

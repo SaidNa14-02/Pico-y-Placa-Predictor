@@ -4,22 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Picoyplaca/styles/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>Pico y placa predictor</title>
 </head>
 
 <body>
     <header>Pico y placa predictor</header>
     <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div>
-            <form>
-                <label for="plate">Please input your plate:</label><br>
-                <input type="text" id="plate" name="plate" placeholder="ABC-1234"><br>
-                <label for="date">Please input the date:</label><br>
-                <input type="date" id="date" name="date"><br>
-                <label for="time">Please input the time:</label><br>
-                <input type="time" id="time" name="time" format="24"><br>
-                <button class="submit-btn">Check </button>
+            <form method="POST" action="{{ url_for('index')}}">
+                {{form.csrf_token}}
+                <div class="form-group">
+                    {{form.plate.label(text='Plate number')}}<br>
+                    {{form.plate(class='form-control', placeholder='ABC-1234')}}<br>
+                    {% if form.plate.errors %}
+                        {% for error in form.plate.errors %}
+                            <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{form.time.label(text='Date')}}<br>
+                    {{form.date(class='form-control', type='date')}}<br>
+                    {% if form.date.errors %}
+                        {% for error in form.date.errors %}
+                            <span class="error" color="red">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{form.time.label(text='Time')}}<br>
+                    {{form.time(class='form-control', type='time')}}<br>
+                    {% if form.time.errors %}
+                        {% for error in form.time.errors %}
+                            <span class="error" color="red">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {{form.submit(class='submit-btn', value='Check')}}
             </form>
         </div>
     </main>
