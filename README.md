@@ -66,6 +66,8 @@ $env:FLASK_DEBUG = "1"
 # Run Flask application
 python -m flask run
 
+Notes: Don't run index.html directly in your browser, run flask app instead.
+
 ### 4. Project Structure and Functionality
 
 This project implements the Pico y Placa traffic restriction system using 4 main classes:
