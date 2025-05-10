@@ -1,4 +1,5 @@
 import calendar
+from datetime import datetime
 from models.schedule import Schedule
 from models.vehicle import Vehicle
 
@@ -18,8 +19,8 @@ class DayRestriction:
         if not self.schedule.check_date(date):
             raise ValueError("Invalid date format")
         
-        day, month, year = map(int, date.split("/"))
-        weekday = calendar.weekday(year, month, day)
+        date_obj = datetime.strptime(date, "%Y-%m-%d")
+        weekday = date_obj.weekday()
         return calendar.day_name[weekday]
 
     def check_day_restriction(self, input_date: str, plate: str):

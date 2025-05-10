@@ -13,7 +13,7 @@ class Schedule:
 
     def set_date(self, date):
         if self.check_date(date):
-            self.__date = datetime.strptime(date, "%d/%m/%Y").date()
+            self.__date = datetime.strptime(date, "%Y-%m-%d").date()
         else:
             raise ValueError("Invalid date format")
 
@@ -27,23 +27,14 @@ class Schedule:
         if not input_date or not isinstance(input_date, str):
             return False
         try:
-            datetime.strptime(input_date, "%d/%m/%Y")
+            datetime.strptime(input_date, "%Y-%m-%d")
             return True
         except ValueError:
             return False
     
     def check_time(self, input_time):
-
         if not input_time or not isinstance(input_time, str):
             return False
-        
-        if len(input_time) != 5 or input_time[2] != ':':
-            return False
-        
-        hours, minutes = input_time.split(':')
-        if len(hours) != 2 or len(minutes) != 2:
-            return False
-            
         try:
             datetime.strptime(input_time, "%H:%M")
             return True
