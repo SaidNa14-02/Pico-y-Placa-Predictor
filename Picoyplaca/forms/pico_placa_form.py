@@ -22,7 +22,7 @@ class PicoPlacaForm(FlaskForm):
 
     def validate_date(self, field):
         if not self.schedule.check_date(field.data):
-            raise ValidationError('Invalid date format. Must be DD/MM/YYYY')
+            raise ValidationError('Invalid date format. Must be YYYY-MM-DD')
 
     def validate_time(self, field):
         if not self.schedule.check_time(field.data):
